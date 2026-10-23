@@ -15,6 +15,7 @@ const COLLECTIONS = ['All', 'Akamas Collection'];
 /* ---------- Name and year ---------- */
 document.querySelectorAll('[data-studio-name]').forEach(el => { el.textContent = STUDIO_NAME; });
 document.title = document.title.replace('Buteo Studio', STUDIO_NAME);
+document.querySelectorAll('.wordmark').forEach(el => el.setAttribute('aria-label', STUDIO_NAME + ', by Emilios C. Christodoulou'));
 document.querySelectorAll('[data-year]').forEach(el => { el.textContent = new Date().getFullYear(); });
 
 /* ---------- Social icons ---------- */

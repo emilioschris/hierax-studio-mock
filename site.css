@@ -25,10 +25,10 @@
 
   --serif: "Young Serif", Georgia, serif;
   --sans: "Montserrat", system-ui, sans-serif;
-  --script: "Norican", cursive;
+  --script: "Mr Dafoe", cursive;
 
   --gutter: 16px;
-  --bar: 64px;
+  --bar: 80px;
   --catbar: 47px;
 }
 @media (prefers-color-scheme: dark) {
@@ -45,7 +45,7 @@
     color-scheme: dark;
   }
 }
-@media (min-width: 760px) { :root { --gutter: 40px; --bar: 72px; } }
+@media (min-width: 760px) { :root { --gutter: 40px; --bar: 88px; } }
 
 /* ---------- Base ---------- */
 *, *::before, *::after { box-sizing: border-box; }
@@ -75,15 +75,13 @@ button { font: inherit; color: inherit; }
   height: var(--bar); padding: 0 var(--gutter) 0 calc(var(--gutter) - 8px);
   display: flex; align-items: center; justify-content: space-between; gap: 24px;
 }
-.wordmark { display: flex; align-items: center; gap: 12px; white-space: nowrap; }
-.wordmark__logo { display: block; flex: none; height: 44px; width: 75px; }   /* logo cropped to the hawk and branch, 1300 x 760 */
-.wordmark__text { display: flex; flex-direction: column; align-items: flex-start; }
-.wordmark__name { font-family: var(--serif); font-size: 20px; line-height: 1; }
-.wordmark__sig {
-  display: inline-block; margin-top: 5px;
-  font-family: var(--script); font-size: 14px; line-height: 1; color: var(--text-2);
-  transform: rotate(-4deg); transform-origin: left;
-}
+.wordmark { display: block; flex: none; }
+/* Logo, name and signature as one drawing: 66px tall (54px on very narrow phones) */
+.wordmark__lockup { display: block; height: 66px; width: 330px; overflow: visible; }
+.wordmark__name { font-family: var(--serif); font-size: 380px; fill: var(--text); }   /* sizes are in drawing units: 380 = about 33px */
+.wordmark__sig { font-family: var(--script); font-size: 210px; fill: var(--text-2); }
+.wordmark__branch { fill: #5A5149; stroke: #170B04; stroke-width: 4; stroke-linejoin: round; }   /* colours sampled from the logo */
+@media (max-width: 400px) { .wordmark__lockup { height: 54px; width: 270px; } }
 .site-header__right { display: none; align-items: center; gap: 40px; }
 .site-header__nav { display: flex; gap: 32px; }
 .site-header__nav a { color: var(--text-2); transition: color .2s ease; }
@@ -99,10 +97,6 @@ button { font: inherit; color: inherit; }
 .drawer .site-header__nav { flex-direction: column; gap: 0; }
 .drawer .site-header__nav a { padding: 14px 0; border-bottom: 1px solid var(--line); color: var(--text); }
 .drawer .social { margin-top: 20px; gap: 20px; }
-@media (min-width: 760px) {
-  .wordmark__name { font-size: 24px; }
-  .wordmark__sig { font-size: 16px; }
-}
 @media (min-width: 860px) {
   .site-header__right { display: flex; }
   .menu-btn, .drawer, .drawer.is-open { display: none; }

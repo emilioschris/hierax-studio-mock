@@ -1,5 +1,5 @@
 /* =========================================================
-   Buteo Studio · catalogue data and grid
+   Hierax Studio · catalogue data and grid
    Used by index.html (all pieces, filtered by the category bar)
    and akamas.html (Akamas Collection only).
    ========================================================= */

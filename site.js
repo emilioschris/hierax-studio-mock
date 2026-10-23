@@ -1,10 +1,10 @@
 /* =========================================================
-   Buteo Studio · shared script for every page
+   Hierax Studio · shared script for every page
    Name, social links, phone menu, category bar.
    ========================================================= */
 
 /* ---------- Settings: edit these ---------- */
-const STUDIO_NAME = 'Buteo Studio';
+const STUDIO_NAME = 'Hierax Studio';
 
 // Paste the real profile links here.
 const SOCIAL = { instagram: '#', facebook: '#', youtube: '#' };
@@ -14,7 +14,7 @@ const COLLECTIONS = ['All', 'Akamas Collection'];
 
 /* ---------- Name and year ---------- */
 document.querySelectorAll('[data-studio-name]').forEach(el => { el.textContent = STUDIO_NAME; });
-document.title = document.title.replace('Buteo Studio', STUDIO_NAME);
+document.title = document.title.replace('Hierax Studio', STUDIO_NAME);
 document.querySelectorAll('.wordmark').forEach(el => el.setAttribute('aria-label', STUDIO_NAME + ', by Emilios C. Christodoulou'));
 document.querySelectorAll('[data-year]').forEach(el => { el.textContent = new Date().getFullYear(); });
 

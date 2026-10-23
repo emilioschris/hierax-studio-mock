@@ -7,7 +7,7 @@
 const STUDIO_NAME = 'Hierax Studio';
 
 // Paste the real profile links here.
-const SOCIAL = { instagram: '#', facebook: '#', youtube: '#' };
+const SOCIAL = { instagram: 'https://www.instagram.com/hieraxstudio/', facebook: '#', youtube: '#' };
 
 // The filter bar. Each name (except All) matches a piece's "collection" in index.html.
 const COLLECTIONS = ['All', 'Akamas Collection'];

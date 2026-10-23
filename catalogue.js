@@ -8,7 +8,7 @@
 // One entry per piece. Maps to a Shopify product:
 //   name -> title, category -> product type, collection -> collection, species -> a variant option or metafield,
 //   status "sold" -> sold out (no inventory), image -> featured image URL.
-// Leave image empty to show a wood-toned placeholder.
+// Leave image empty to show a graph-paper placeholder.
 const PIECES = [
   { id: 1,  name: 'The Bench',          category: 'Benches', species: 'White Oak',    collection: 'Akamas Collection', status: 'sold',      image: '' },
   { id: 2,  name: 'Low Coffee Table',   category: 'Tables',  species: 'Black Walnut', collection: 'Akamas Collection', status: 'sold',      image: '' },
@@ -49,14 +49,13 @@ function startCatalogue(initialCollection) {
   const grid = document.getElementById('grid');
   const empty = document.getElementById('empty');
   const sentinel = document.getElementById('sentinel');
-  const WOOD = { 'White Oak': 'oak', 'Black Walnut': 'walnut', 'Cherry': 'cherry', 'Hard Maple': 'maple' };
   let active = initialCollection;
   let list = [];
   let shown = 0;
 
   const pad = n => String(n).padStart(2, '0');
   const tileHTML = p => `
-    <li class="tile ${WOOD[p.species] || 'oak'}">
+    <li class="tile">
       ${p.image ? `<img src="${p.image}" alt="${p.name} in ${p.species}" loading="lazy">` : `<span class="tile__num" aria-hidden="true">No. ${pad(p.id)}</span>`}
       ${p.status === 'sold' ? '<span class="tile__sold caps">Sold</span>' : ''}
       <div class="tile__info">

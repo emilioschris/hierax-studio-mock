@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Buteo Studio · Handmade Furniture, Boston</title>
+<meta name="description" content="Handmade solid hardwood furniture from Boston, Massachusetts.">
+<link rel="icon" type="image/png" href="assets/logo/hawk-mark.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Montserrat:wght@400;500;600&family=Norican&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="site.css">
+<link rel="stylesheet" href="catalogue.css">
+</head>
+<body data-page="catalogue">
+
+<!-- ===================== header (same on every page) ===================== -->
+<header class="site-header">
+  <div class="site-header__bar">
+    <a class="wordmark" href="index.html">
+      <svg class="wordmark__logo" viewBox="0 140 1300 760" aria-hidden="true"><image href="images/buteo-logo-transparent.png" width="1600" height="1001"/></svg>
+      <span class="wordmark__text">
+        <span class="wordmark__name" data-studio-name>Buteo Studio</span>
+        <span class="wordmark__sig">by Emilios C. Christodoulou</span>
+      </span>
+    </a>
+    <div class="site-header__right">
+      <nav class="site-header__nav caps" aria-label="Main">
+        <div class="nav-item">
+          <a href="index.html" aria-current="page">Furniture</a>
+          <div class="nav-sub"><a href="akamas.html">Akamas Collection</a></div>
+        </div>
+        <a href="#">Deals</a>
+        <a href="#">Blog</a>
+        <a href="about.html">About</a>
+      </nav>
+      <ul class="social" data-social-list></ul>
+    </div>
+    <button class="menu-btn" id="menu-btn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="drawer">
+      <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M2 7 H18 M2 13 H18"/></svg>
+    </button>
+  </div>
+  <div class="drawer" id="drawer">
+    <nav class="site-header__nav caps" aria-label="Menu">
+      <a href="index.html" aria-current="page">Furniture</a>
+      <a class="nav-sub-link" href="akamas.html">Akamas Collection</a>
+      <a href="#">Deals</a>
+      <a href="#">Blog</a>
+      <a href="about.html">About</a>
+    </nav>
+    <ul class="social" data-social-list></ul>
+  </div>
+</header>
+
+<main>
+  <h1 class="sr-only"><span data-studio-name>Buteo Studio</span> furniture catalogue</h1>
+
+  <!-- ===================== categories (same on every page) ===================== -->
+  <nav class="categories" aria-label="Filter by collection">
+    <ul class="categories__list caps" id="categories"></ul>
+  </nav>
+
+  <!-- ===================== grid ===================== -->
+  <section class="catalogue" aria-label="Catalogue">
+    <ul class="catalogue__grid" id="grid"></ul>
+    <p class="catalogue__empty caps" id="empty" hidden>Nothing here yet</p>
+    <div class="catalogue__sentinel" id="sentinel" aria-hidden="true"></div>
+  </section>
+</main>
+
+<!-- ===================== footer (same on every page) ===================== -->
+<footer class="site-footer caps">
+  <p><span data-studio-name>Buteo Studio</span> · Handmade furniture · Boston, Massachusetts</p>
+  <p>© <span data-year>2026</span> <span data-studio-name>Buteo Studio</span></p>
+</footer>
+
+<script src="site.js"></script>
+<script src="catalogue.js"></script>
+<script>
+  // All pieces; the category bar switches the collection in place.
+  BUTEO.onFilter = startCatalogue(BUTEO.collection);
+</script>
+</body>
+</html>

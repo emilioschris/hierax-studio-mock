@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
 <title>About · Hierax Studio</title>
 <meta name="description" content="About the maker behind Hierax Studio, handmade furniture in Boston, Massachusetts.">
 <link rel="icon" type="image/png" href="assets/logo/hawk-mark.png">
@@ -25,15 +26,29 @@
     object-position: 52% 60%;        /* keep the deck and the palm in view */
     opacity: .85;                    /* slightly transparent */
   }
-  .about__text { max-width: 34em; padding: 48px var(--gutter) 24px; }
+  .about__text { padding: 48px var(--gutter) 24px; }
   .about__label { margin: 0 0 18px; color: var(--text-2); }
-  .about__name { font-family: var(--serif); font-weight: 400; font-size: clamp(34px, 5vw, 52px); line-height: 1.05; margin: 0 0 28px; }
-  .about__bio p { font-weight: 400; font-size: 16px; line-height: 1.85; margin: 0 0 1.1em; }
-  .about__sig {
-    display: inline-block; margin: 12px 0 0;
-    font-family: var(--script); font-size: 44px; line-height: 1;
-    transform: rotate(-4deg); transform-origin: left;
+  .about__bio p, .philosophy__intro, .principle p, .closing p {
+    max-width: 38em; font-weight: 400; font-size: 16px; line-height: 1.85; margin: 0 0 1.1em;
   }
+
+  /* ---------- Section: philosophy (intro, then four principles: 2 x 2 on desktop) ---------- */
+  .philosophy, .closing { border-top: 1px solid var(--line); }   /* Troodos Stone hairlines between sections */
+  .philosophy { padding: 64px var(--gutter); text-align: center; }   /* the whole section is centred */
+  .philosophy .philosophy__intro { max-width: none; margin: 0 auto 48px; }   /* the intro spans the full page width */
+  .principles { display: grid; gap: 40px; }
+  .principle h3 { font-family: var(--serif); font-weight: 400; font-size: clamp(22px, 2.4vw, 28px); line-height: 1.2; margin: 0 0 12px; }
+  .principle p { margin: 0 auto; }
+  @media (min-width: 900px) {
+    .philosophy { padding: 96px var(--gutter); }
+    .principles { grid-template-columns: 1fr 1fr; gap: 56px 72px; max-width: 80em; margin: 0 auto; }
+  }
+
+  /* ---------- Section: closing (centred, signed) ---------- */
+  .closing { text-align: center; padding: 120px var(--gutter) 96px; }
+  .closing p { margin: 0 auto 28px; }
+  .closing .closing__sig { display: inline-block; max-width: none; margin: 0; font-family: var(--script); font-size: 48px; line-height: 1; transform: rotate(-4deg); }
+  @media (min-width: 900px) { .closing { padding: 160px var(--gutter) 120px; } }
 
   @media (min-width: 900px) {
     .about {
@@ -107,22 +122,52 @@
     <ul class="categories__list caps" id="categories"></ul>
   </nav>
 
-  <!-- ===================== about ===================== -->
-  <section class="about" aria-labelledby="about-title">
+  <h1 class="sr-only">About <span data-studio-name>Hierax Studio</span></h1>
+
+  <!-- ===================== the maker ===================== -->
+  <section class="about" aria-labelledby="maker-title">
     <div class="about__media">
       <img src="images/hierax-about-build.jpg" alt="Two people laying pine boards on a timber deck beneath a tall date palm, with hills and white houses in the distance">
     </div>
     <div class="about__text">
-      <p class="about__label caps">About the maker</p>
-      <h1 class="about__name" id="about-title">Emilios C. Christodoulou</h1>
+      <h2 class="about__label caps" id="maker-title">The maker</h2>
       <div class="about__bio">
         <p>I grew up in Cyprus, building things out of wood for as long as I can remember.</p>
+        <p>Cyprus is a small island with a long memory. Its villages have carved dowry chests and woven rush-seat chairs by hand for centuries, and the painted churches of the Troodos still shelter under their steep timber roofs. It is also the birthplace of Zeno of Kition, who went on to found Stoicism in Athens. I grew up with both: a respect for things made slowly by hand, and the Stoic idea that a good life is a simple one, lived in agreement with nature.</p>
+        <p>At home, we harvest our olive orchards every year and press our own oil. It taught me to respect olive wood and everything it can become.</p>
         <p>Once a year we travelled to my grandparents' house in Pittsburgh. George Nakashima's furniture was scattered through the rooms, pieces my grandfather commissioned that turned the house into something truly its own. There was an Amish staircase I appreciated for the strength and quality of its build, and a doorway I still think about. Not far away, I had my first visit to Frank Lloyd Wright's Fallingwater, and understood how a home can bring you closer to nature without ever leaving it.</p>
-        <p>At home in Cyprus, we harvest our olive orchards every year and press our own oil. It taught me to respect olive wood and everything it can become.</p>
-        <p>Woodworking has always been a spiritual pursuit for me. <span data-studio-name>Hierax Studio</span> is how I share that feeling with you.</p>
       </div>
-      <p class="about__sig">Emilios</p>
     </div>
+  </section>
+
+  <!-- ===================== philosophy ===================== -->
+  <section class="philosophy" aria-labelledby="philosophy-title">
+    <h2 class="about__label caps" id="philosophy-title">Philosophy</h2>
+    <p class="philosophy__intro">Years later at UCL, I stood before Jeremy Bentham himself, preserved in his glass case a short walk from the Bartlett, where I was surrounded by some of the brightest minds designing the built environment. Bentham argued that every choice should be judged by how much good it does. I have tried to design that way ever since.</p>
+    <div class="principles">
+      <div class="principle">
+        <h3>Use comes first.</h3>
+        <p>Every piece starts with one question: how will it be used, every day, for decades? Nothing is added that does not earn its place.</p>
+      </div>
+      <div class="principle">
+        <h3>Beauty is what makes things last.</h3>
+        <p>The most sustainable furniture is the piece nobody wants to throw away. People take care of what they love, so beauty is not decoration. It is how a piece survives.</p>
+      </div>
+      <div class="principle">
+        <h3>The tree's second life.</h3>
+        <p>Wood is one of the most regenerative materials we have. It grows back, it holds carbon, and when it is joined well it lasts for centuries. I choose each board for its grain and its history, and join it wood to wood wherever I can.</p>
+      </div>
+      <div class="principle">
+        <h3>Built to outlive us.</h3>
+        <p>Every piece is made to be repaired, never replaced, and handed down.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== closing ===================== -->
+  <section class="closing" aria-label="Closing">
+    <p>Woodworking has always been a spiritual pursuit for me. <span data-studio-name>Hierax Studio</span> is how I share that feeling with you.</p>
+    <p class="closing__sig" aria-label="Signed, Emilios">Emilios</p>
   </section>
 </main>
 

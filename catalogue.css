@@ -7,9 +7,6 @@
 /* Placeholder until real photos exist: woodworker's graph paper,
    a fine grid with a heavier line every fifth square */
 :root { --paper: #F6F2EA; --grid-minor: rgba(110, 113, 81, .16); --grid-major: rgba(110, 113, 81, .34); }
-@media (prefers-color-scheme: dark) {
-  :root { --paper: #2A241F; --grid-minor: rgba(201, 176, 138, .10); --grid-major: rgba(201, 176, 138, .22); }
-}
 .tile {
   position: relative; aspect-ratio: 1; overflow: hidden;
   background-color: var(--paper);

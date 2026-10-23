@@ -49,18 +49,18 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') setMenu(fals
    On the catalogue page (body data-page="catalogue") it filters the grid in place.
    A collection page (body data-collection="...") shows its own button as selected.
    On any other page it goes to the catalogue with that collection chosen. */
-const BUTEO = {
+const HIERAX = {
   collection: new URLSearchParams(location.search).get('collection') || 'All',
   onFilter: null,
 };
-if (!COLLECTIONS.includes(BUTEO.collection)) BUTEO.collection = 'All';
+if (!COLLECTIONS.includes(HIERAX.collection)) HIERAX.collection = 'All';
 
 const catList = document.getElementById('categories');
 const isCatalogue = document.body.dataset.page === 'catalogue';
 // Old links like index.html?collection=Akamas%20Collection go to that collection's own page.
-if (isCatalogue && COLLECTION_PAGES[BUTEO.collection]) location.replace(COLLECTION_PAGES[BUTEO.collection]);
+if (isCatalogue && COLLECTION_PAGES[HIERAX.collection]) location.replace(COLLECTION_PAGES[HIERAX.collection]);
 const pageCollection = document.body.dataset.collection || null;
-const selected = isCatalogue ? BUTEO.collection : pageCollection;
+const selected = isCatalogue ? HIERAX.collection : pageCollection;
 catList.innerHTML = COLLECTIONS.map(c =>
   `<li><button class="categories__btn caps" type="button" data-cat="${c}" aria-pressed="${c === selected}">${c}</button></li>`
 ).join('');
@@ -71,9 +71,9 @@ catList.addEventListener('click', e => {
   const query = c === 'All' ? '' : '?collection=' + encodeURIComponent(c);
   if (COLLECTION_PAGES[c]) { if (c !== pageCollection) location.href = COLLECTION_PAGES[c]; return; }
   if (!isCatalogue) { if (c !== pageCollection) location.href = 'index.html' + query; return; }
-  if (c === BUTEO.collection) return;
-  BUTEO.collection = c;
+  if (c === HIERAX.collection) return;
+  HIERAX.collection = c;
   catList.querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', b === btn));
   history.replaceState(null, '', location.pathname + query);
-  if (BUTEO.onFilter) BUTEO.onFilter(c);
+  if (HIERAX.onFilter) HIERAX.onFilter(c);
 });

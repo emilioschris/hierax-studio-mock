@@ -12,6 +12,9 @@ const SOCIAL = { instagram: '#', facebook: '#', youtube: '#' };
 // The filter bar. Each name (except All) matches a piece's "collection" in index.html.
 const COLLECTIONS = ['All', 'Akamas Collection'];
 
+// Collections that have their own page. The category bar opens that page instead of filtering in place.
+const COLLECTION_PAGES = { 'Akamas Collection': 'akamas.html' };
+
 /* ---------- Name and year ---------- */
 document.querySelectorAll('[data-studio-name]').forEach(el => { el.textContent = STUDIO_NAME; });
 document.title = document.title.replace('Hierax Studio', STUDIO_NAME);
@@ -54,6 +57,8 @@ if (!COLLECTIONS.includes(BUTEO.collection)) BUTEO.collection = 'All';
 
 const catList = document.getElementById('categories');
 const isCatalogue = document.body.dataset.page === 'catalogue';
+// Old links like index.html?collection=Akamas%20Collection go to that collection's own page.
+if (isCatalogue && COLLECTION_PAGES[BUTEO.collection]) location.replace(COLLECTION_PAGES[BUTEO.collection]);
 const pageCollection = document.body.dataset.collection || null;
 const selected = isCatalogue ? BUTEO.collection : pageCollection;
 catList.innerHTML = COLLECTIONS.map(c =>
@@ -64,6 +69,7 @@ catList.addEventListener('click', e => {
   if (!btn) return;
   const c = btn.dataset.cat;
   const query = c === 'All' ? '' : '?collection=' + encodeURIComponent(c);
+  if (COLLECTION_PAGES[c]) { if (c !== pageCollection) location.href = COLLECTION_PAGES[c]; return; }
   if (!isCatalogue) { if (c !== pageCollection) location.href = 'index.html' + query; return; }
   if (c === BUTEO.collection) return;
   BUTEO.collection = c;

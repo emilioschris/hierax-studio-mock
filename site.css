@@ -104,7 +104,9 @@ button { font: inherit; color: inherit; }
 
 /* ---------- Section: categories (filter bar) ---------- */
 .categories {
+  position: relative; z-index: 2;
   border-bottom: 1px solid var(--line);
+  box-shadow: 0 8px 14px -10px rgba(43, 36, 32, .28);   /* light shadow under the bar */
   overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch;
 }
 .categories::-webkit-scrollbar { display: none; }
@@ -123,6 +125,24 @@ button { font: inherit; color: inherit; }
 .site-footer { text-align: center; padding: 72px var(--gutter) 48px; color: var(--text-2); }
 .site-footer p { margin: 0; }
 .site-footer p + p { margin-top: 10px; }
+
+/* ---------- Section: name (the Hierax definition) ----------
+   Full page width and compact: the word on the left, the text beside it on wider screens. */
+.name-def { padding: 32px var(--gutter); border-bottom: 1px solid var(--line); }   /* --line is Troodos Stone */
+.name-def__term {
+  margin: 0 0 16px; white-space: nowrap;
+  font-family: var(--sans); font-weight: 300; font-size: clamp(26px, 3.4vw, 44px); line-height: 1.1;
+  letter-spacing: .2em; text-transform: uppercase;
+}
+.name-def__term span { letter-spacing: .04em; text-transform: none; }   /* the pronunciation keeps its own letters */
+.name-def__body p { font-weight: 400; font-size: 15px; line-height: 1.7; margin: 0 0 .6em; }
+.name-def__body p:last-child { margin-bottom: 0; }
+.name-def [lang="grc"] { font-family: "Noto Sans", var(--sans); }   /* Montserrat has no Greek */
+@media (min-width: 900px) {
+  .name-def { display: grid; grid-template-columns: auto 1fr; gap: 56px; align-items: center; padding: 40px var(--gutter); }
+  .name-def__term { margin: 0; }
+  .name-def__body p { font-size: 16px; }
+}
 
 @media (prefers-reduced-motion: reduce) {
   * { transition-duration: 0s !important; }

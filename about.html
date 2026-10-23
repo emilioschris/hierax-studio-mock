@@ -15,14 +15,15 @@
      Section: about (photo with the maker's story)
      Phones and small tablets: photo first, text below.
      Wider screens: photo on the left, text on the right.
-     The photo is framed around the street lamp.
+     The photo shows the deck build under the palm, slightly transparent.
      ========================================================= */
   .about__media img {
     display: block; width: 100%;
     height: calc(100svh - var(--bar) - var(--catbar));
     min-height: 420px;
     object-fit: cover;
-    object-position: 45% 45%;        /* keep the lamp in view */
+    object-position: 52% 60%;        /* keep the deck and the palm in view */
+    opacity: .85;                    /* slightly transparent */
   }
   .about__text { max-width: 34em; padding: 48px var(--gutter) 24px; }
   .about__label { margin: 0 0 18px; color: var(--text-2); }
@@ -64,12 +65,12 @@
   <div class="site-header__bar">
     <a class="wordmark" href="index.html" aria-label="Hierax Studio, by Emilios C. Christodoulou">
       <!-- The logo with the name sitting straight on the branch and the signature below it (live text, so the name can be swapped) -->
-      <svg class="wordmark__lockup" viewBox="0 140 3800 760" aria-hidden="true">
+      <svg class="wordmark__lockup" viewBox="0 140 3560 760" aria-hidden="true">
         <!-- the branch, extended under the name like an underline (drawn beneath the original logo) -->
-        <path class="wordmark__branch" d="M1100 474 C1120 466 1130 461 1140 458 C1200 454 1260 452 1320 452 C1900 452 2500 451 3100 450 C3400 449 3650 449 3790 452 C3650 457 3400 461 3100 466 C2500 476 1900 489 1320 506 C1240 510 1170 516 1100 525 Z"/><path class="wordmark__branch" d="M3420 452 C3450 440 3478 424 3502 410 C3508 408 3514 414 3510 419 C3490 432 3468 444 3452 452 Z"/>
+        <path class="wordmark__branch" d="M1100 474 C1120 466 1130 461 1140 458 C1200 454 1260 452 1320 452 C1900 452 2400 451 2900 450 C3200 449 3420 449 3518 452 C3420 456 3200 460 2900 465 C2400 475 1900 489 1320 506 C1240 510 1170 516 1100 525 Z"/>
         <image href="images/hierax-logo-transparent.png" width="1600" height="1001"/>
-        <text class="wordmark__name" x="1080" y="445" data-studio-name>Hierax Studio</text>
-        <text class="wordmark__sig" x="1100" y="720">by Emilios C. Christodoulou</text>
+        <text class="wordmark__name" x="1200" y="445" data-studio-name>Hierax Studio</text>
+        <text class="wordmark__sig" x="1220" y="720">by Emilios C. Christodoulou</text>
       </svg>
     </a>
     <div class="site-header__right">
@@ -109,7 +110,7 @@
   <!-- ===================== about ===================== -->
   <section class="about" aria-labelledby="about-title">
     <div class="about__media">
-      <img src="images/hierax-about-portrait.jpg" alt="A red brick townhouse covered in climbing wisteria, with a wrought-iron balcony and a black street lamp in front">
+      <img src="images/hierax-about-build.jpg" alt="Two people laying pine boards on a timber deck beneath a tall date palm, with hills and white houses in the distance">
     </div>
     <div class="about__text">
       <p class="about__label caps">About the maker</p>

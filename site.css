@@ -30,20 +30,7 @@
   --gutter: 16px;
   --bar: 64px;
   --catbar: 47px;
-}
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #1C1815;
-    --bg-rgb: 28, 24, 21;
-    --text: #EDE6DA;
-    --text-2: #A79E92;
-    --line: #4A423B;
-    --accent: #D07850;
-    --overlay: rgba(28, 24, 21, .8);
-    --on-overlay: #EDE6DA;
-    --header-bg: rgba(28, 24, 21, .9);
-    color-scheme: dark;
-  }
+  color-scheme: light;   /* always the light version, on every device (no dark mode) */
 }
 @media (min-width: 760px) { :root { --gutter: 40px; --bar: 72px; } }
 

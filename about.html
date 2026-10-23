@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>About · Buteo Studio</title>
+<meta name="description" content="About the maker behind Buteo Studio, handmade furniture in Boston, Massachusetts.">
+<link rel="icon" type="image/png" href="assets/logo/hawk-mark.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Montserrat:wght@400;500;600&family=Norican&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="site.css">
+<style>
+  /* =========================================================
+     Section: about (photo with the maker's story)
+     Phones and small tablets: photo first, text below.
+     Wider screens: photo on the left, text on the right.
+     The photo is framed around the street lamp.
+     ========================================================= */
+  .about__media img {
+    display: block; width: 100%;
+    height: calc(100svh - var(--bar) - var(--catbar));
+    min-height: 420px;
+    object-fit: cover;
+    object-position: 45% 45%;        /* keep the lamp in view */
+  }
+  .about__text { max-width: 34em; padding: 48px var(--gutter) 24px; }
+  .about__label { margin: 0 0 18px; color: var(--text-2); }
+  .about__name { font-family: var(--serif); font-weight: 400; font-size: clamp(34px, 5vw, 52px); line-height: 1.05; margin: 0 0 28px; }
+  .about__bio p { font-weight: 400; font-size: 16px; line-height: 1.85; margin: 0 0 1.1em; }
+  .about__sig {
+    display: inline-block; margin: 12px 0 0;
+    font-family: var(--script); font-size: 44px; line-height: 1;
+    transform: rotate(-4deg); transform-origin: left;
+  }
+
+  @media (min-width: 900px) {
+    .about {
+      display: grid; grid-template-columns: 1fr minmax(0, 46%);
+      min-height: calc(100svh - var(--bar) - var(--catbar));
+    }
+    .about__media { position: relative; }
+    .about__media img {
+      position: absolute; inset: 0; height: 100%; min-height: 0;
+      /* the right edge of the photo fades into the text column */
+      -webkit-mask-image: linear-gradient(270deg, transparent 0%, #000 38%);
+              mask-image: linear-gradient(270deg, transparent 0%, #000 38%);
+    }
+    .about__media::after {           /* and softens (blurs) as it fades */
+      content: ""; position: absolute; inset: 0 0 0 auto; width: 40%;
+      -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+      -webkit-mask-image: linear-gradient(270deg, #000 0%, transparent 100%);
+              mask-image: linear-gradient(270deg, #000 0%, transparent 100%);
+      pointer-events: none;
+    }
+    .about__text { align-self: center; padding: 64px var(--gutter); }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===================== header (same on every page) ===================== -->
+<header class="site-header">
+  <div class="site-header__bar">
+    <a class="wordmark" href="index.html">
+      <svg class="wordmark__logo" viewBox="0 140 1300 760" aria-hidden="true"><image href="images/buteo-logo-transparent.png" width="1600" height="1001"/></svg>
+      <span class="wordmark__text">
+        <span class="wordmark__name" data-studio-name>Buteo Studio</span>
+        <span class="wordmark__sig">by Emilios C. Christodoulou</span>
+      </span>
+    </a>
+    <div class="site-header__right">
+      <nav class="site-header__nav caps" aria-label="Main">
+        <div class="nav-item">
+          <a href="index.html">Furniture</a>
+          <div class="nav-sub"><a href="akamas.html">Akamas Collection</a></div>
+        </div>
+        <a href="#">Deals</a>
+        <a href="#">Blog</a>
+        <a href="about.html" aria-current="page">About</a>
+      </nav>
+      <ul class="social" data-social-list></ul>
+    </div>
+    <button class="menu-btn" id="menu-btn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="drawer">
+      <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M2 7 H18 M2 13 H18"/></svg>
+    </button>
+  </div>
+  <div class="drawer" id="drawer">
+    <nav class="site-header__nav caps" aria-label="Menu">
+      <a href="index.html">Furniture</a>
+      <a class="nav-sub-link" href="akamas.html">Akamas Collection</a>
+      <a href="#">Deals</a>
+      <a href="#">Blog</a>
+      <a href="about.html" aria-current="page">About</a>
+    </nav>
+    <ul class="social" data-social-list></ul>
+  </div>
+</header>
+
+<main>
+  <!-- ===================== categories (same on every page) ===================== -->
+  <nav class="categories" aria-label="Browse collections">
+    <ul class="categories__list caps" id="categories"></ul>
+  </nav>
+
+  <!-- ===================== about ===================== -->
+  <section class="about" aria-labelledby="about-title">
+    <div class="about__media">
+      <img src="images/buteo-about-portrait.jpg" alt="A red brick townhouse covered in climbing wisteria, with a wrought-iron balcony and a black street lamp in front">
+    </div>
+    <div class="about__text">
+      <p class="about__label caps">About the maker</p>
+      <h1 class="about__name" id="about-title">Emilios C. Christodoulou</h1>
+      <div class="about__bio">
+        <p>I grew up in Cyprus, building things out of wood for as long as I can remember.</p>
+        <p>Once a year we travelled to my grandparents' house in Pittsburgh. George Nakashima's furniture was scattered through the rooms, pieces my grandfather commissioned that turned the house into something truly its own. There was an Amish staircase I appreciated for the strength and quality of its build, and a doorway I still think about. Not far away, I had my first visit to Frank Lloyd Wright's Fallingwater, and understood how a home can bring you closer to nature without ever leaving it.</p>
+        <p>At home in Cyprus, we harvest our olive orchards every year and press our own oil. It taught me to respect olive wood and everything it can become.</p>
+        <p>Woodworking has always been a spiritual pursuit for me. <span data-studio-name>Buteo Studio</span> is how I share that feeling with you.</p>
+      </div>
+      <p class="about__sig">Emilios</p>
+    </div>
+  </section>
+</main>
+
+<!-- ===================== footer (same on every page) ===================== -->
+<footer class="site-footer caps">
+  <p><span data-studio-name>Buteo Studio</span> · Handmade furniture · Boston, Massachusetts</p>
+  <p>© <span data-year>2026</span> <span data-studio-name>Buteo Studio</span></p>
+</footer>
+
+<script src="site.js"></script>
+</body>
+</html>

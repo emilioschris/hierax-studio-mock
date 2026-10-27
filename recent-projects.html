@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>Recent Projects · Hierax Studio</title>
+<meta name="description" content="Recent projects from Hierax Studio, handmade furniture in Boston, Massachusetts.">
+<link rel="icon" type="image/png" href="assets/logo/hawk-mark.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Montserrat:wght@400;500;600&family=Mr+Dafoe&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="site.css?v=2026-10-27.2">
+<link rel="stylesheet" href="catalogue.css?v=2026-10-27.2">
+<style>
+  /* =========================================================
+     Section: projects grid (one tile per project, same 3-column grid as the catalogue)
+     ========================================================= */
+  .tile__btn { position: absolute; inset: 0; width: 100%; height: 100%; padding: 0; border: 0; background: none; cursor: pointer; }
+  .tile__btn:focus-visible { outline-offset: -3px; }
+  .tile__btn:focus-visible .tile__info { opacity: 1; }
+  .tile__multi {   /* marks a tile as a set of photos */
+    position: absolute; top: 8px; right: 8px; width: 18px; height: 18px;
+    fill: none; stroke: var(--limewash); stroke-width: 1.6;
+    filter: drop-shadow(0 0 2px rgba(43, 36, 32, .6));
+  }
+  @media (min-width: 760px) { .tile__multi { top: 12px; right: 12px; width: 20px; height: 20px; } }
+
+  /* =========================================================
+     Section: project viewer (slideshow of one project's photos, with its text)
+     Phones: photo, then text below (scrolls). From 900px: text beside the photo.
+     Walnut Ink at 92% behind it.
+     ========================================================= */
+  .viewer {
+    position: fixed; inset: 0; z-index: 50; overflow-y: auto;
+    background: rgba(43, 36, 32, .92); color: var(--limewash);
+  }
+  .viewer[hidden] { display: none; }
+  .viewer__post { padding: 64px var(--gutter) 40px; }
+  .viewer__stage { position: relative; display: grid; place-items: center; touch-action: pan-y; }
+  .viewer__img { display: block; max-width: 100%; max-height: 68svh; object-fit: contain; }
+  .viewer__btn { position: absolute; display: grid; place-items: center; width: 48px; height: 48px; padding: 0; background: none; border: 0; color: inherit; cursor: pointer; }
+  .viewer__btn svg { width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 1.4; filter: drop-shadow(0 0 3px rgba(43, 36, 32, .7)); }
+  .viewer__btn[hidden] { display: none; }
+  .viewer__prev { left: -8px; top: 50%; transform: translateY(-50%); }
+  .viewer__next { right: -8px; top: 50%; transform: translateY(-50%); }
+  .viewer__close { position: fixed; top: 8px; right: 8px; }
+  .viewer__dots { display: flex; justify-content: center; gap: 8px; margin: 16px 0 0; }
+  .viewer__dots li { width: 6px; height: 6px; border-radius: 50%; background: var(--troodos-stone); opacity: .5; }
+  .viewer__dots li[aria-current="true"] { background: var(--limewash); opacity: 1; }
+  .viewer__text { padding-top: 28px; }
+  .viewer__count { margin: 0 0 16px; color: var(--troodos-stone); }
+  .viewer__title { font-family: var(--serif); font-weight: 400; font-size: clamp(28px, 3vw, 40px); line-height: 1.15; margin: 0 0 10px; }
+  .viewer__sub { margin: 0 0 24px; color: var(--troodos-stone); }
+  .viewer__body { max-width: 38em; font-weight: 400; font-size: 16px; line-height: 1.85; margin: 0 0 28px; }
+  .viewer__specs { display: grid; grid-template-columns: max-content 1fr; gap: 10px 24px; margin: 0; }
+  .viewer__specs dt { color: var(--troodos-stone); }
+  .viewer__specs dd { margin: 0; }
+  @media (min-width: 900px) {
+    .viewer__post {
+      display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 360px); gap: 56px; align-items: center;
+      min-height: 100svh; padding: 48px 72px;
+    }
+    .viewer__img { max-height: calc(100svh - 120px); }
+    .viewer__prev { left: -60px; }
+    .viewer__next { right: -60px; }
+    .viewer__close { top: 16px; right: 16px; }
+    .viewer__text { padding-top: 0; }
+  }
+</style>
+</head>
+<body data-collection="Recent Projects">
+
+<!-- ===================== header (same on every page) ===================== -->
+<header class="site-header">
+  <div class="site-header__bar">
+    <a class="wordmark" href="index.html" aria-label="Hierax Studio, by Emilios C. Christodoulou">
+      <!-- The logo with the name sitting straight on the branch and the signature below it (live text, so the name can be swapped) -->
+      <svg class="wordmark__lockup" viewBox="0 140 3560 760" aria-hidden="true">
+        <!-- the branch, extended under the name like an underline (drawn beneath the original logo) -->
+        <path class="wordmark__branch" d="M1100 474 C1120 466 1130 461 1140 458 C1200 454 1260 452 1320 452 C1900 452 2400 451 2900 450 C3200 449 3420 449 3518 452 C3420 456 3200 460 2900 465 C2400 475 1900 489 1320 506 C1240 510 1170 516 1100 525 Z"/>
+        <image href="images/hierax-logo-transparent.png" width="1600" height="1001"/>
+        <text class="wordmark__name" x="1200" y="445" data-studio-name>Hierax Studio</text>
+        <text class="wordmark__sig" x="1220" y="720">by Emilios C. Christodoulou</text>
+      </svg>
+    </a>
+    <div class="site-header__right">
+      <nav class="site-header__nav caps" aria-label="Main">
+        <div class="nav-item">
+          <a href="index.html">Furniture</a>
+          <div class="nav-sub"><a href="akamas.html">Akamas Collection</a><a href="recent-projects.html" aria-current="page">Recent Projects</a></div>
+        </div>
+        <a href="#">Deals</a>
+        <a href="#">Blog</a>
+        <a href="about.html">About</a>
+      </nav>
+      <ul class="social" data-social-list></ul>
+    </div>
+    <button class="menu-btn" id="menu-btn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="drawer">
+      <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M2 7 H18 M2 13 H18"/></svg>
+    </button>
+  </div>
+  <div class="drawer" id="drawer">
+    <nav class="site-header__nav caps" aria-label="Menu">
+      <a href="index.html">Furniture</a>
+      <a class="nav-sub-link" href="akamas.html">Akamas Collection</a>
+      <a class="nav-sub-link" href="recent-projects.html" aria-current="page">Recent Projects</a>
+      <a href="#">Deals</a>
+      <a href="#">Blog</a>
+      <a href="about.html">About</a>
+    </nav>
+    <ul class="social" data-social-list></ul>
+  </div>
+</header>
+
+<main>
+  <!-- ===================== categories (same on every page) ===================== -->
+  <nav class="categories" aria-label="Browse collections">
+    <ul class="categories__list caps" id="categories"></ul>
+  </nav>
+
+  <h1 class="sr-only">Recent Projects</h1>
+
+  <!-- ===================== grid ===================== -->
+  <section class="catalogue" aria-label="Recent projects, most recent first">
+    <ul class="catalogue__grid" id="projects"></ul>
+  </section>
+</main>
+
+<!-- ===================== footer (same on every page) ===================== -->
+<footer class="site-footer caps">
+  <p><span data-studio-name>Hierax Studio</span> · Handmade furniture · Boston, Massachusetts</p>
+  <p>© <span data-year>2026</span> <span data-studio-name>Hierax Studio</span></p>
+</footer>
+
+<!-- ===================== project viewer ===================== -->
+<div class="viewer" id="viewer" role="dialog" aria-modal="true" aria-labelledby="viewer-title" hidden>
+  <div class="viewer__post">
+    <div>
+      <div class="viewer__stage" id="viewer-stage">
+        <img class="viewer__img" id="viewer-img" src="" alt="">
+        <button class="viewer__btn viewer__prev" type="button" aria-label="Previous photo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 4 L7 12 L15 20"/></svg></button>
+        <button class="viewer__btn viewer__next" type="button" aria-label="Next photo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4 L17 12 L9 20"/></svg></button>
+      </div>
+      <ol class="viewer__dots" id="viewer-dots" aria-hidden="true"></ol>
+    </div>
+    <div class="viewer__text">
+      <p class="viewer__count caps" id="viewer-count"></p>
+      <h2 class="viewer__title" id="viewer-title"></h2>
+      <p class="viewer__sub caps" id="viewer-sub"></p>
+      <p class="viewer__body" id="viewer-body"></p>
+      <dl class="viewer__specs caps" id="viewer-specs"></dl>
+    </div>
+  </div>
+  <button class="viewer__btn viewer__close" type="button" aria-label="Close"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5 L19 19 M19 5 L5 19"/></svg></button>
+</div>
+
+<script src="site.js?v=2026-10-27.2"></script>
+<script>
+  /* ---------- Projects: edit this ----------
+     Most recent first. The first photo is the grid tile. Bracketed values are placeholders. */
+  const PROJECTS = [
+    {
+      title: 'Live Edge Table Set',
+      sub: 'OLIVE · COFFEE TABLE AND SIDE TABLE',
+      body: 'A coffee table and matching side table cut from a single slab of olive, sourced here in Boston. I kept the live edge exactly as the tree grew it and let the spalting and dark heart lines run the length of both pieces, so the two tables read as one.',
+      specs: [
+        ['Wood', 'Olive, one slab'],
+        ['Coffee table', '[L x W x H in]'],
+        ['Side table', '[L x W x H in]'],
+        ['Finish', '[Finish]'],
+        ['Base', 'Blackened steel'],
+        ['Status', '[Sold / Available]'],
+      ],
+      photos: [
+        { src: 'images/projects/olive-set/olive-01-coffee-table-front.jpg', alt: 'Live edge olive coffee table seen from the front on blackened steel legs, dark heart lines running the length of the slab' },
+        { src: 'images/projects/olive-set/olive-02-coffee-table-angle.jpg', alt: 'The olive coffee table from one end, the slab narrowing and curving along its live edge' },
+        { src: 'images/projects/olive-set/olive-03-coffee-table-grain.jpg', alt: 'Close view along the coffee table top: spalted olive grain with a dark open check following the heart line' },
+        { src: 'images/projects/olive-set/olive-04-side-table-room.jpg', alt: 'The olive side table in a living room, a turned wooden lamp standing on its live edge top' },
+        { src: 'images/projects/olive-set/olive-05-side-table-angle.jpg', alt: 'The olive side table from above at an angle, its figured grain and live edge over a blackened steel leg' },
+        { src: 'images/projects/olive-set/olive-06-live-edge-detail.jpg', alt: 'Detail of the side table corner, where the hand-finished live edge curls down into the end grain' },
+      ],
+    },
+  ];
+
+  /* ---------- Grid ---------- */
+  const grid = document.getElementById('projects');
+  grid.innerHTML = PROJECTS.map((p, i) => `
+    <li class="tile">
+      <button class="tile__btn" type="button" data-project="${i}" aria-label="${p.title}, ${p.photos.length} photos">
+        <img src="${p.photos[0].src}" alt="" ${i > 2 ? 'loading="lazy"' : ''}>
+        ${p.photos.length > 1 ? '<svg class="tile__multi" viewBox="0 0 20 20" aria-hidden="true"><rect x="6" y="2" width="12" height="12" rx="1.5"/><path d="M14 18 H3.5 A1.5 1.5 0 0 1 2 16.5 V6"/></svg>' : ''}
+        <span class="tile__info">
+          <span class="tile__name">${p.title}</span>
+          <span class="tile__meta caps">${p.sub}</span>
+        </span>
+      </button>
+    </li>`).join('');
+
+  /* ---------- Viewer: arrows, swipe, keys; Escape closes ---------- */
+  const viewer = document.getElementById('viewer');
+  const img = document.getElementById('viewer-img');
+  const dots = document.getElementById('viewer-dots');
+  const count = document.getElementById('viewer-count');
+  const prev = viewer.querySelector('.viewer__prev');
+  const next = viewer.querySelector('.viewer__next');
+  const closeBtn = viewer.querySelector('.viewer__close');
+  let project = null, index = 0, opener = null;
+
+  function show(i) {
+    const photos = project.photos;
+    index = (i + photos.length) % photos.length;
+    img.src = photos[index].src;
+    img.alt = photos[index].alt;
+    count.textContent = `${index + 1} / ${photos.length}`;
+    dots.querySelectorAll('li').forEach((d, n) => d.setAttribute('aria-current', n === index));
+    new Image().src = photos[(index + 1) % photos.length].src;   // load the next photo ahead
+  }
+  function open(p, from) {
+    project = PROJECTS[p];
+    opener = from;
+    document.getElementById('viewer-title').textContent = project.title;
+    document.getElementById('viewer-sub').textContent = project.sub;
+    document.getElementById('viewer-body').textContent = project.body;
+    document.getElementById('viewer-specs').innerHTML = project.specs.map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`).join('');
+    dots.innerHTML = project.photos.map(() => '<li></li>').join('');
+    prev.hidden = next.hidden = dots.hidden = count.hidden = project.photos.length < 2;
+    show(0);
+    viewer.hidden = false;
+    viewer.scrollTop = 0;
+    document.body.style.overflow = 'hidden';
+    closeBtn.focus();
+  }
+  function close() {
+    viewer.hidden = true;
+    document.body.style.overflow = '';
+    if (opener) opener.focus();
+  }
+
+  grid.addEventListener('click', e => {
+    const btn = e.target.closest('[data-project]');
+    if (btn) open(+btn.dataset.project, btn);
+  });
+  prev.addEventListener('click', () => show(index - 1));
+  next.addEventListener('click', () => show(index + 1));
+  closeBtn.addEventListener('click', close);
+  viewer.addEventListener('click', e => { if (e.target === viewer || e.target.classList.contains('viewer__post')) close(); });   // click the backdrop to close
+
+  // Swipe left or right on the photo
+  const stage = document.getElementById('viewer-stage');
+  let startX = null;
+  stage.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
+  stage.addEventListener('touchend', e => {
+    if (startX === null) return;
+    const dx = e.changedTouches[0].clientX - startX;
+    if (Math.abs(dx) > 40) show(index + (dx < 0 ? 1 : -1));
+    startX = null;
+  });
+
+  document.addEventListener('keydown', e => {
+    if (viewer.hidden) return;
+    if (e.key === 'Escape') close();
+    else if (e.key === 'ArrowLeft') show(index - 1);
+    else if (e.key === 'ArrowRight') show(index + 1);
+    else if (e.key === 'Tab') {   // keep focus inside the viewer
+      const btns = [...viewer.querySelectorAll('button:not([hidden])')];
+      const at = btns.indexOf(document.activeElement);
+      e.preventDefault();
+      btns[(at + (e.shiftKey ? -1 : 1) + btns.length) % btns.length].focus();
+    }
+  });
+</script>
+</body>
+</html>

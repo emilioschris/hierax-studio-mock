@@ -11,58 +11,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Montserrat:wght@300;400;500;600&family=Mr+Dafoe&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400&text=%E1%BC%B1%CE%AD%CF%81%CE%B1%CE%BE&display=swap" rel="stylesheet">   <!-- only the Greek letters of ἱέραξ, which Montserrat lacks -->
-<link rel="stylesheet" href="site.css?v=2026-10-27.1">
-<link rel="stylesheet" href="catalogue.css?v=2026-10-27.1">
-<style>
-  /* =========================================================
-     Section: most recent project (hero, text, gallery, lightbox)
-     Phones: hero, then text, then a 2-column gallery.
-     From 900px: text beside the hero. From 760px: gallery in one row of 5.
-     ========================================================= */
-  .project { padding: 32px var(--gutter); border-bottom: 1px solid var(--line); }   /* --line is Troodos Stone */
-  .project__label { margin: 0 0 20px; color: var(--text-2); }
-  .project__photo { display: block; width: 100%; padding: 0; border: 0; background: none; cursor: zoom-in; }
-  .project__hero img { display: block; width: 100%; height: auto; }   /* aspect ratio kept, slab never cropped */
-  .project__text { padding: 28px 0 32px; }
-  .project__title { font-family: var(--serif); font-weight: 400; font-size: clamp(28px, 3vw, 40px); line-height: 1.15; margin: 0 0 10px; }
-  .project__sub { margin: 0 0 24px; color: var(--text-2); }
-  .project__body { max-width: 38em; font-weight: 400; font-size: 16px; line-height: 1.85; margin: 0 0 28px; }
-  .project__specs { display: grid; grid-template-columns: max-content 1fr; gap: 10px 24px; margin: 0; }
-  .project__specs dt { color: var(--text-2); }
-  .project__specs dd { margin: 0; }
-  .project__gallery { display: grid; grid-template-columns: repeat(2, 1fr); gap: 4px; }
-  .project__gallery .project__photo { aspect-ratio: 3 / 4; overflow: hidden; }   /* uniform frame */
-  .project__gallery img { display: block; width: 100%; height: 100%; object-fit: cover; }
-  @media (min-width: 760px) { .project__gallery { grid-template-columns: repeat(5, 1fr); } }
-  @media (min-width: 900px) {
-    .project { padding: 40px var(--gutter); }
-    .project__main { display: grid; grid-template-columns: minmax(0, 1.8fr) minmax(0, 1fr); gap: 48px; align-items: center; margin-bottom: 4px; }
-    .project__text { padding: 0; }
-  }
-
-  /* ---------- Lightbox (Walnut Ink at 92%) ---------- */
-  .lightbox {
-    position: fixed; inset: 0; z-index: 50;
-    display: grid; place-items: center;
-    background: rgba(43, 36, 32, .92);
-    color: var(--limewash);
-  }
-  .lightbox[hidden] { display: none; }
-  .lightbox__img { display: block; max-width: calc(100vw - 32px); max-height: calc(100svh - 120px); object-fit: contain; }
-  .lightbox__btn { position: absolute; display: grid; place-items: center; width: 48px; height: 48px; padding: 0; background: none; border: 0; color: inherit; cursor: pointer; }
-  .lightbox__btn svg { width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 1.4; }
-  .lightbox__close { top: 12px; right: 12px; }
-  .lightbox__prev, .lightbox__next { bottom: 16px; }
-  .lightbox__prev { left: calc(50% - 64px); }
-  .lightbox__next { right: calc(50% - 64px); }
-  .lightbox__count { position: absolute; top: 28px; left: var(--gutter); margin: 0; }
-  @media (min-width: 760px) {
-    .lightbox__img { max-width: calc(100vw - 160px); max-height: calc(100svh - 80px); }
-    .lightbox__prev, .lightbox__next { top: 50%; bottom: auto; transform: translateY(-50%); }
-    .lightbox__prev { left: 16px; }
-    .lightbox__next { right: 16px; }
-  }
-</style>
+<link rel="stylesheet" href="site.css?v=2026-10-27.2">
+<link rel="stylesheet" href="catalogue.css?v=2026-10-27.2">
 </head>
 <body data-page="catalogue">
 
@@ -83,7 +33,7 @@
       <nav class="site-header__nav caps" aria-label="Main">
         <div class="nav-item">
           <a href="index.html" aria-current="page">Furniture</a>
-          <div class="nav-sub"><a href="akamas.html">Akamas Collection</a></div>
+          <div class="nav-sub"><a href="akamas.html">Akamas Collection</a><a href="recent-projects.html">Recent Projects</a></div>
         </div>
         <a href="#">Deals</a>
         <a href="#">Blog</a>
@@ -99,6 +49,7 @@
     <nav class="site-header__nav caps" aria-label="Menu">
       <a href="index.html" aria-current="page">Furniture</a>
       <a class="nav-sub-link" href="akamas.html">Akamas Collection</a>
+      <a class="nav-sub-link" href="recent-projects.html">Recent Projects</a>
       <a href="#">Deals</a>
       <a href="#">Blog</a>
       <a href="about.html">About</a>
@@ -114,36 +65,6 @@
   <nav class="categories" aria-label="Filter by collection">
     <ul class="categories__list caps" id="categories"></ul>
   </nav>
-
-  <!-- ===================== most recent project ===================== -->
-  <section class="project" aria-labelledby="project-title">
-    <p class="project__label caps">Most Recent Project</p>
-    <div class="project__main">
-      <button class="project__photo project__hero" type="button" data-photo>
-        <img src="images/projects/olive-set/olive-01-coffee-table-front.jpg" width="1600" height="1200" alt="Live edge olive coffee table seen from the front on blackened steel legs, dark heart lines running the length of the slab">
-      </button>
-      <div class="project__text">
-        <h2 class="project__title" id="project-title">Live Edge Table Set</h2>
-        <p class="project__sub caps">OLIVE · COFFEE TABLE AND SIDE TABLE</p>
-        <p class="project__body">A coffee table and matching side table cut from a single slab of olive, sourced here in Boston. I kept the live edge exactly as the tree grew it and let the spalting and dark heart lines run the length of both pieces, so the two tables read as one.</p>
-        <dl class="project__specs caps">
-          <dt>Wood</dt><dd>Olive, one slab</dd>
-          <dt>Coffee table</dt><dd>[L x W x H in]</dd>
-          <dt>Side table</dt><dd>[L x W x H in]</dd>
-          <dt>Finish</dt><dd>[Finish]</dd>
-          <dt>Base</dt><dd>Blackened steel</dd>
-          <dt>Status</dt><dd>[Sold / Available]</dd>
-        </dl>
-      </div>
-    </div>
-    <ul class="project__gallery">
-      <li><button class="project__photo" type="button" data-photo><img src="images/projects/olive-set/olive-02-coffee-table-angle.jpg" width="1200" height="1600" loading="lazy" alt="The olive coffee table from one end, the slab narrowing and curving along its live edge"></button></li>
-      <li><button class="project__photo" type="button" data-photo><img src="images/projects/olive-set/olive-03-coffee-table-grain.jpg" width="1200" height="1600" loading="lazy" alt="Close view along the coffee table top: spalted olive grain with a dark open check following the heart line"></button></li>
-      <li><button class="project__photo" type="button" data-photo><img src="images/projects/olive-set/olive-04-side-table-room.jpg" width="1200" height="1600" loading="lazy" alt="The olive side table in a living room, a turned wooden lamp standing on its live edge top"></button></li>
-      <li><button class="project__photo" type="button" data-photo><img src="images/projects/olive-set/olive-05-side-table-angle.jpg" width="1200" height="1600" loading="lazy" alt="The olive side table from above at an angle, its figured grain and live edge over a blackened steel leg"></button></li>
-      <li><button class="project__photo" type="button" data-photo><img src="images/projects/olive-set/olive-06-live-edge-detail.jpg" width="1200" height="1600" loading="lazy" alt="Detail of the side table corner, where the hand-finished live edge curls down into the end grain"></button></li>
-    </ul>
-  </section>
 
   <!-- ===================== name ===================== -->
   <section class="name-def" aria-label="The name Hierax">
@@ -168,66 +89,11 @@
   <p>© <span data-year>2026</span> <span data-studio-name>Hierax Studio</span></p>
 </footer>
 
-<!-- ===================== lightbox (most recent project) ===================== -->
-<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Project photos" hidden>
-  <p class="lightbox__count caps" id="lightbox-count"></p>
-  <img class="lightbox__img" id="lightbox-img" src="" alt="">
-  <button class="lightbox__btn lightbox__prev" type="button" aria-label="Previous photo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 4 L7 12 L15 20"/></svg></button>
-  <button class="lightbox__btn lightbox__next" type="button" aria-label="Next photo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4 L17 12 L9 20"/></svg></button>
-  <button class="lightbox__btn lightbox__close" type="button" aria-label="Close"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5 L19 19 M19 5 L5 19"/></svg></button>
-</div>
-
-<script src="site.js?v=2026-10-27.1"></script>
-<script src="catalogue.js?v=2026-10-27.1"></script>
+<script src="site.js?v=2026-10-27.2"></script>
+<script src="catalogue.js?v=2026-10-27.2"></script>
 <script>
   // All pieces; the category bar switches the collection in place.
   HIERAX.onFilter = startCatalogue(HIERAX.collection);
-
-  // Most recent project: any photo opens the lightbox; arrows step through, Escape closes.
-  (() => {
-    const photos = [...document.querySelectorAll('.project [data-photo] img')];
-    const box = document.getElementById('lightbox');
-    const img = document.getElementById('lightbox-img');
-    const count = document.getElementById('lightbox-count');
-    let index = 0, opener = null;
-
-    function show(i) {
-      index = (i + photos.length) % photos.length;
-      img.src = photos[index].src;
-      img.alt = photos[index].alt;
-      count.textContent = `${index + 1} / ${photos.length}`;
-    }
-    function open(i, from) {
-      opener = from;
-      show(i);
-      box.hidden = false;
-      document.body.style.overflow = 'hidden';
-      box.querySelector('.lightbox__close').focus();
-    }
-    function close() {
-      box.hidden = true;
-      document.body.style.overflow = '';
-      if (opener) opener.focus();
-    }
-
-    photos.forEach((p, i) => p.parentElement.addEventListener('click', e => open(i, e.currentTarget)));
-    box.querySelector('.lightbox__prev').addEventListener('click', () => show(index - 1));
-    box.querySelector('.lightbox__next').addEventListener('click', () => show(index + 1));
-    box.querySelector('.lightbox__close').addEventListener('click', close);
-    box.addEventListener('click', e => { if (e.target === box) close(); });   // click the backdrop to close
-    document.addEventListener('keydown', e => {
-      if (box.hidden) return;
-      if (e.key === 'Escape') close();
-      else if (e.key === 'ArrowLeft') show(index - 1);
-      else if (e.key === 'ArrowRight') show(index + 1);
-      else if (e.key === 'Tab') {   // keep focus inside the lightbox
-        const btns = [...box.querySelectorAll('button')];
-        const at = btns.indexOf(document.activeElement);
-        e.preventDefault();
-        btns[(at + (e.shiftKey ? -1 : 1) + btns.length) % btns.length].focus();
-      }
-    });
-  })();
 </script>
 </body>
 </html>

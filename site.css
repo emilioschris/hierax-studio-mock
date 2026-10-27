@@ -147,6 +147,7 @@ button { font: inherit; color: inherit; }
   padding: 12px 16px; background: var(--bg); border: 1px solid var(--line);
 }
 .nav-sub a::before { content: "● "; color: var(--accent); font-size: 7px; vertical-align: 2px; }
+.nav-sub a + a { border-top: 0; }   /* stacked collection links share one border */
 .nav-item:hover .nav-sub, .nav-item:focus-within .nav-sub { opacity: 1; visibility: visible; transform: none; }
 .drawer .site-header__nav a.nav-sub-link { padding-left: 18px; }
 .drawer .site-header__nav a.nav-sub-link::before { content: "● "; color: var(--accent); font-size: 7px; vertical-align: 2px; }

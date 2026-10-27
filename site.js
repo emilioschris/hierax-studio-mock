@@ -10,10 +10,10 @@ const STUDIO_NAME = 'Hierax Studio';
 const SOCIAL = { instagram: 'https://www.instagram.com/hieraxstudio/', facebook: '#', youtube: '#' };
 
 // The filter bar. Each name (except All) matches a piece's "collection" in index.html.
-const COLLECTIONS = ['All', 'Akamas Collection'];
+const COLLECTIONS = ['All', 'Akamas Collection', 'Recent Projects'];
 
 // Collections that have their own page. The category bar opens that page instead of filtering in place.
-const COLLECTION_PAGES = { 'Akamas Collection': 'akamas.html' };
+const COLLECTION_PAGES = { 'Akamas Collection': 'akamas.html', 'Recent Projects': 'recent-projects.html' };
 
 /* ---------- Name and year ---------- */
 document.querySelectorAll('[data-studio-name]').forEach(el => { el.textContent = STUDIO_NAME; });

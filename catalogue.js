@@ -10,6 +10,8 @@
 //   status "sold" -> sold out (no inventory), image -> featured image URL.
 // Leave image empty to show a graph-paper placeholder.
 const PIECES = [
+  { id: 28, name: 'Live Edge Coffee Table', category: 'Tables', species: 'Olive', collection: '', status: 'sold', image: 'images/projects/olive-set/olive-01-coffee-table-front.jpg' },
+  { id: 29, name: 'Live Edge Side Table',   category: 'Tables', species: 'Olive', collection: '', status: 'sold', image: 'images/projects/olive-set/olive-05-side-table-angle.jpg' },
   { id: 1,  name: 'The Bench',          category: 'Benches', species: 'White Oak',    collection: 'Akamas Collection', status: 'sold',      image: '' },
   { id: 2,  name: 'Low Coffee Table',   category: 'Tables',  species: 'Black Walnut', collection: 'Akamas Collection', status: 'sold',      image: '' },
   { id: 3,  name: 'Blanket Chest',      category: 'Storage', species: 'Cherry',       collection: 'Akamas Collection', status: 'sold',      image: '' },

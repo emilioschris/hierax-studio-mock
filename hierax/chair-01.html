@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<meta name="robots" content="noindex">   <!-- unlisted: only linked from the card on index.html -->
+<title>Chair No. 01 · Hierax Studio</title>
+<meta name="description" content="Chair No. 01, a slatted lounge chair, in 3D.">
+<link rel="icon" type="image/png" href="../assets/logo/hawk-mark.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Montserrat:wght@400;500;600&family=Mr+Dafoe&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../site.css?v=2026-10-27.2">
+<style>
+  /* =========================================================
+     Section: 3D viewer (the chair on limewash, with view buttons)
+     ========================================================= */
+  .back { display: inline-block; margin: 20px var(--gutter) 0; color: var(--text-2); transition: color .2s ease; }
+  .back:hover { color: var(--text); }
+  .chair { padding: 16px var(--gutter) 0; }
+  .chair__title { font-family: var(--serif); font-weight: 400; font-size: clamp(28px, 3vw, 40px); line-height: 1.15; margin: 0 0 6px; }
+  .chair__sub { margin: 0 0 20px; color: var(--text-2); }
+  .chair__stage { position: relative; height: min(72svh, 640px); border: 1px solid var(--line); background: var(--bg); }
+  .chair__stage canvas { display: block; width: 100%; height: 100%; cursor: grab; touch-action: none; }
+  .chair__stage canvas:active { cursor: grabbing; }
+  .chair__views { position: absolute; left: 12px; bottom: 12px; display: flex; gap: 8px; }
+  .chair__views button { padding: 9px 12px 8px; background: var(--bg); border: 1px solid var(--line); color: var(--text-2); cursor: pointer; transition: color .2s ease, border-color .2s ease; }
+  .chair__views button:hover { color: var(--text); }
+  .chair__views button[aria-pressed="true"] { color: var(--text); border-color: var(--accent); }
+  .chair__hint { margin: 12px 0 0; color: var(--text-2); }
+  .chair__error { position: absolute; inset: 0; display: grid; place-items: center; padding: 24px; text-align: center; color: var(--text-2); }
+  /* ?thumb: just the chair, for the card image on index.html */
+  .is-thumb .site-header, .is-thumb .categories, .is-thumb .back, .is-thumb .chair__title, .is-thumb .chair__sub,
+  .is-thumb .chair__views, .is-thumb .chair__hint, .is-thumb .site-footer { display: none; }
+  .is-thumb .chair { padding: 0; }
+  .is-thumb .chair__stage { height: 100vh; border: 0; }
+</style>
+</head>
+<body>
+
+<!-- ===================== header (same on every page) ===================== -->
+<header class="site-header">
+  <div class="site-header__bar">
+    <a class="wordmark" href="../index.html" aria-label="Hierax Studio, by Emilios C. Christodoulou">
+      <!-- The logo with the name sitting straight on the branch and the signature below it (live text, so the name can be swapped) -->
+      <svg class="wordmark__lockup" viewBox="0 140 3560 760" aria-hidden="true">
+        <!-- the branch, extended under the name like an underline (drawn beneath the original logo) -->
+        <path class="wordmark__branch" d="M1100 474 C1120 466 1130 461 1140 458 C1200 454 1260 452 1320 452 C1900 452 2400 451 2900 450 C3200 449 3420 449 3518 452 C3420 456 3200 460 2900 465 C2400 475 1900 489 1320 506 C1240 510 1170 516 1100 525 Z"/>
+        <image href="../images/hierax-logo-transparent.png" width="1600" height="1001"/>
+        <text class="wordmark__name" x="1200" y="445" data-studio-name>Hierax Studio</text>
+        <text class="wordmark__sig" x="1220" y="720">by Emilios C. Christodoulou</text>
+      </svg>
+    </a>
+    <div class="site-header__right">
+      <nav class="site-header__nav caps" aria-label="Main">
+        <div class="nav-item">
+          <a href="../index.html">Furniture</a>
+          <div class="nav-sub"><a href="../akamas.html">Akamas Collection</a><a href="../recent-projects.html">Recent Projects</a></div>
+        </div>
+        <a href="#">Deals</a>
+        <a href="#">Blog</a>
+        <a href="../about.html">About</a>
+      </nav>
+      <ul class="social" data-social-list></ul>
+    </div>
+    <button class="menu-btn" id="menu-btn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="drawer">
+      <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M2 7 H18 M2 13 H18"/></svg>
+    </button>
+  </div>
+  <div class="drawer" id="drawer">
+    <nav class="site-header__nav caps" aria-label="Menu">
+      <a href="../index.html">Furniture</a>
+      <a class="nav-sub-link" href="../akamas.html">Akamas Collection</a>
+      <a class="nav-sub-link" href="../recent-projects.html">Recent Projects</a>
+      <a href="#">Deals</a>
+      <a href="#">Blog</a>
+      <a href="../about.html">About</a>
+    </nav>
+    <ul class="social" data-social-list></ul>
+  </div>
+</header>
+
+<main>
+  <!-- ===================== categories (same on every page) ===================== -->
+  <nav class="categories" aria-label="Filter by collection">
+    <ul class="categories__list caps" id="categories"></ul>
+  </nav>
+
+  <a class="back caps" href="../index.html">← <span data-studio-name>Hierax Studio</span></a>
+
+  <!-- ===================== viewer ===================== -->
+  <section class="chair" aria-labelledby="chair-title">
+    <h1 class="chair__title" id="chair-title">Chair No. 01</h1>
+    <p class="chair__sub caps">Slatted lounge chair · From the sketchbook</p>
+    <div class="chair__stage" id="stage">
+      <div class="chair__views caps" role="group" aria-label="View">
+        <button class="caps" type="button" data-view="three-quarter" aria-pressed="true">¾</button>
+        <button class="caps" type="button" data-view="front" aria-pressed="false">Front</button>
+        <button class="caps" type="button" data-view="side" aria-pressed="false">Side</button>
+      </div>
+    </div>
+    <p class="chair__hint caps">Drag to turn · Scroll or pinch to zoom</p>
+  </section>
+</main>
+
+<!-- ===================== footer (same on every page) ===================== -->
+<footer class="site-footer caps">
+  <p><span data-studio-name>Hierax Studio</span> · Handmade furniture · Boston, Massachusetts</p>
+  <p>© <span data-year>2026</span> <span data-studio-name>Hierax Studio</span></p>
+</footer>
+
+<script src="../site.js?v=2026-10-27.2"></script>
+<script type="importmap">
+  { "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+  } }
+</script>
+<script type="module">
+  import * as THREE from 'three';
+  import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+  const params = new URLSearchParams(location.search);
+  if (params.has('thumb')) document.body.classList.add('is-thumb');
+  const stage = document.getElementById('stage');
+
+  /* ---------- Scene: limewash room, soft light, a shadow on the floor ---------- */
+  const renderer = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: true });   // kept so screenshots catch the frame
+  renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+  renderer.shadowMap.enabled = true;
+  renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+  renderer.outputColorSpace = THREE.SRGBColorSpace;
+  stage.prepend(renderer.domElement);
+
+  const scene = new THREE.Scene();
+  scene.background = new THREE.Color('#EEE8DD');   // Limewash
+  const camera = new THREE.PerspectiveCamera(32, 1, 0.05, 20);
+
+  scene.add(new THREE.HemisphereLight('#F6F2EA', '#A8A299', 1.6));
+  const sun = new THREE.DirectionalLight('#FFF4E4', 2.2);
+  sun.position.set(1.6, 3, 2.2);
+  sun.castShadow = true;
+  sun.shadow.mapSize.set(2048, 2048);
+  sun.shadow.camera.left = sun.shadow.camera.bottom = -1;
+  sun.shadow.camera.right = sun.shadow.camera.top = 1;
+  sun.shadow.radius = 4;
+  scene.add(sun);
+
+  const floor = new THREE.Mesh(new THREE.PlaneGeometry(8, 8), new THREE.ShadowMaterial({ opacity: .18 }));
+  floor.rotation.x = -Math.PI / 2;
+  floor.receiveShadow = true;
+  scene.add(floor);
+
+  /* ---------- The chair (metres; y up, the front faces +z) ---------- */
+  const chair = new THREE.Group();
+  scene.add(chair);
+  const oak = new THREE.MeshStandardMaterial({ color: '#C9B08A', roughness: .72 });   // White Oak
+  const v = (x, y, z) => new THREE.Vector3(x, y, z);
+
+  function part(w, h, d, pos, quat) {
+    const m = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), oak);
+    m.position.copy(pos);
+    if (quat) m.quaternion.copy(quat);
+    m.castShadow = m.receiveShadow = true;
+    chair.add(m);
+    return m;
+  }
+  // A member running from a to b: its length on local y, w across x, d on the remaining side.
+  function member(a, b, w, d) {
+    const dir = b.clone().sub(a);
+    const q = new THREE.Quaternion().setFromUnitVectors(v(0, 1, 0), dir.clone().normalize());
+    return part(w, dir.length(), d, a.clone().add(b).multiplyScalar(.5), q);
+  }
+
+  const X = .31;            // centre line of the legs and stiles, either side
+  const LEG = .045;         // leg and stile section
+  const FRONT_Z = .30;      // front legs
+  const ARM_Y = .56;        // underside of the arms = top of the front legs
+  const ARM_T = .025, ARM_W = .06;
+  // Back stiles lean back: from the floor to the crest
+  const STILE_FOOT = v(0, 0, -.28), STILE_TOP = v(0, .88, -.46);
+  const stileZ = y => STILE_FOOT.z + (STILE_TOP.z - STILE_FOOT.z) * (y / STILE_TOP.y);
+  const stileDir = STILE_TOP.clone().sub(STILE_FOOT).normalize();
+  const stileQ = new THREE.Quaternion().setFromUnitVectors(v(0, 1, 0), stileDir);
+  const along = (s, x) => STILE_FOOT.clone().addScaledVector(stileDir, s).setX(x);   // a point s metres up the stile
+  // Seat rails tilt back: centre line from the front legs down to the stiles
+  const RAIL_H = .06, RAIL_W = .025;
+  const RAIL_FRONT_Y = .32, RAIL_BACK_Y = .26;
+
+  for (const side of [-1, 1]) {
+    const x = side * X;
+    member(v(x, 0, FRONT_Z), v(x, ARM_Y, FRONT_Z), LEG, LEG);                                  // front leg, up to the arm
+    member(v(x, STILE_FOOT.y, STILE_FOOT.z), v(x, STILE_TOP.y, STILE_TOP.z), LEG, LEG);         // back stile
+    member(v(x, RAIL_FRONT_Y, FRONT_Z), v(x, RAIL_BACK_Y, stileZ(RAIL_BACK_Y)), RAIL_W, RAIL_H); // side rail, leg to stile
+    // Arm: rests on the front leg (a little overhang) and runs back into the stile
+    const armY = ARM_Y + ARM_T / 2, armX = side * (X - LEG / 2 + ARM_W / 2);
+    const armFront = FRONT_Z + .05, armBack = stileZ(armY);
+    part(ARM_W, ARM_T, armFront - armBack, v(armX, armY, (armFront + armBack) / 2));
+  }
+
+  // Front and back seat rails, between the legs and between the stiles
+  const inner = 2 * X - LEG;
+  part(inner, RAIL_H, RAIL_W, v(0, RAIL_FRONT_Y, FRONT_Z));
+  part(inner, RAIL_H, RAIL_W, v(0, RAIL_BACK_Y, stileZ(RAIL_BACK_Y)), stileQ);
+
+  // Seat slats: laid across the top of the side rails, following their tilt
+  const railA = v(0, RAIL_FRONT_Y, FRONT_Z), railB = v(0, RAIL_BACK_Y, stileZ(RAIL_BACK_Y));
+  const railDir = railB.clone().sub(railA).normalize();
+  const railUp = v(0, -railDir.z, railDir.y);                  // normal to the rail, pointing up
+  const slatQ = new THREE.Quaternion().setFromUnitVectors(v(0, 0, -1), railDir);
+  const SLAT_T = .018, SLAT_W = .05, SEAT_SLATS = 9;
+  const seatStart = FRONT_Z - LEG / 2 - .01 - SLAT_W / 2;     // just behind the front legs
+  const seatEnd = stileZ(RAIL_BACK_Y + .05) + LEG / 2 + .01 + SLAT_W / 2;   // just in front of the stiles
+  const railLen = railB.distanceTo(railA);
+  for (let i = 0; i < SEAT_SLATS; i++) {
+    const z = seatStart + (seatEnd - seatStart) * i / (SEAT_SLATS - 1);
+    const s = (FRONT_Z - z) / (FRONT_Z - railB.z) * railLen;
+    const p = railA.clone().addScaledVector(railDir, s).addScaledVector(railUp, RAIL_H / 2 + SLAT_T / 2);
+    part(2 * X + RAIL_W + .02, SLAT_T, SLAT_W, p, slatQ);
+  }
+
+  // Back slats: housed between the stiles, following their lean
+  const BACK_SLATS = 6;
+  const stileLen = STILE_TOP.distanceTo(STILE_FOOT);
+  const CREST_H = .075;
+  for (let i = 0; i < BACK_SLATS; i++) {
+    const s = .40 + i * .07;
+    part(inner, SLAT_W, SLAT_T, along(s, 0), stileQ);
+  }
+  // Crest rail housed between the stiles, its top flush with theirs
+  part(inner, CREST_H, .03, along(stileLen - CREST_H / 2, 0), stileQ);
+
+  /* ---------- Camera and views ---------- */
+  const controls = new OrbitControls(camera, renderer.domElement);
+  controls.enableDamping = true;
+  controls.minDistance = 1.2;
+  controls.maxDistance = 5;
+  controls.maxPolarAngle = Math.PI / 2 - .02;   // stay above the floor
+  const target = v(0, .42, -.04);
+  const VIEWS = {
+    'three-quarter': v(1.55, 1.15, 1.85),
+    front: v(0, .6, 2.6),
+    side: v(2.6, .6, -.04),
+  };
+  let tween = null;
+  function setView(name, instant) {
+    const to = VIEWS[name] || VIEWS['three-quarter'];
+    document.querySelectorAll('[data-view]').forEach(b => b.setAttribute('aria-pressed', b.dataset.view === name));
+    if (instant || matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      camera.position.copy(to); controls.target.copy(target); tween = null; return;
+    }
+    tween = { from: camera.position.clone(), to, t: 0 };
+  }
+  document.querySelector('.chair__views').addEventListener('click', e => {
+    const b = e.target.closest('[data-view]');
+    if (b) setView(b.dataset.view);
+  });
+  controls.addEventListener('start', () => { tween = null; });
+  setView(params.get('view') || 'three-quarter', true);
+
+  function resize() {
+    const { clientWidth: w, clientHeight: h } = stage;
+    renderer.setSize(w, h, false);
+    camera.aspect = w / h;
+    camera.updateProjectionMatrix();
+  }
+  new ResizeObserver(resize).observe(stage);
+  resize();
+
+  renderer.setAnimationLoop(() => {
+    if (tween) {
+      tween.t = Math.min(1, tween.t + .04);
+      const k = tween.t * tween.t * (3 - 2 * tween.t);
+      camera.position.lerpVectors(tween.from, tween.to, k);
+      if (tween.t === 1) tween = null;
+    }
+    controls.target.copy(target);
+    controls.update();
+    renderer.render(scene, camera);
+  });
+</script>
+<script>
+  // Shown only if the 3D part cannot start (no WebGL, or the library did not load)
+  setTimeout(() => {
+    if (!document.querySelector('#stage canvas')) document.getElementById('stage').insertAdjacentHTML('beforeend',
+      '<p class="chair__error caps">The 3D view could not load in this browser</p>');
+  }, 4000);
+</script>
+</body>
+</html>

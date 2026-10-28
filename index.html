@@ -13,6 +13,19 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400&text=%E1%BC%B1%CE%AD%CF%81%CE%B1%CE%BE&display=swap" rel="stylesheet">   <!-- only the Greek letters of ἱέραξ, which Montserrat lacks -->
 <link rel="stylesheet" href="site.css?v=2026-10-27.2">
 <link rel="stylesheet" href="catalogue.css?v=2026-10-27.2">
+<style>
+  /* =========================================================
+     Section: sketchbook (one card, opens the unlisted 3D viewer)
+     ========================================================= */
+  .sketch { padding: 12px 12px 0; }
+  .sketch__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .sketch__card { display: block; }
+  .sketch__card .tile { display: block; transition: box-shadow .2s ease; }
+  .sketch__card:hover .tile { box-shadow: inset 0 0 0 1px var(--accent); }
+  .sketch__label { display: block; margin-top: 10px; color: var(--text-2); transition: color .2s ease; }
+  .sketch__card:hover .sketch__label { color: var(--text); }
+  @media (min-width: 760px) { .sketch { padding: 20px var(--gutter) 0; } .sketch__grid { gap: 20px; } }
+</style>
 </head>
 <body data-page="catalogue">
 
@@ -80,6 +93,16 @@
     <ul class="catalogue__grid" id="grid"></ul>
     <p class="catalogue__empty caps" id="empty" hidden>Nothing here yet</p>
     <div class="catalogue__sentinel" id="sentinel" aria-hidden="true"></div>
+  </section>
+
+  <!-- ===================== sketchbook (unlisted: not in the nav) ===================== -->
+  <section class="sketch" aria-label="From the sketchbook">
+    <div class="sketch__grid">
+      <a class="sketch__card" href="hierax/chair-01.html">
+        <span class="tile"><span class="tile__num" aria-hidden="true">3D</span></span>
+        <span class="sketch__label caps">Chair No. 01 · Slatted Lounge Chair</span>
+      </a>
+    </div>
   </section>
 </main>
 
